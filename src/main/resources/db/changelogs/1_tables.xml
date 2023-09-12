@@ -1,0 +1,44 @@
+<databaseChangeLog
+  xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+  <changeSet id="20230907-0" author="Mina">
+    <sql>
+      CREATE TABLE IF NOT EXISTS transfer_service.customer
+      (
+        id BIGSERIAL NOT NULL PRIMARY KEY,
+        name VARCHAR NOT NULL,
+        person_number VARCHAR,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+      );
+    </sql>
+    <rollback>
+      DROP TABLE transfer_service.customer;
+    </rollback>
+  </changeSet>
+
+  <changeSet id="20230907-2" author="Mina">
+    <sql>
+      CREATE TABLE IF NOT EXISTS transfer_service.deposit
+      (
+        id BIGSERIAL PRIMARY KEY,
+        request_uid VARCHAR NOT NULL,
+        customer_id BIGINT NOT NULL,
+        from_account_number VARCHAR NOT NULL,
+        to_account_number VARCHAR NOT NULL,
+        amount NUMERIC NOT NULL,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        CONSTRAINT deposit_customer_id_fkey FOREIGN KEY (customer_id) REFERENCES transfer_service.customer (id)
+        );
+
+      CREATE INDEX IF NOT EXISTS customer_id_idx ON transfer_service.deposit (customer_id);
+      CREATE INDEX IF NOT EXISTS created_at_idx ON transfer_service.deposit (created_at);
+    </sql>
+    <rollback>
+      DROP TABLE IF EXISTS transfer_service.deposit;
+    </rollback>
+  </changeSet>
+
+
+</databaseChangeLog>

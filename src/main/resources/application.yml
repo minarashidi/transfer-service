@@ -1,0 +1,47 @@
+server:
+  port: 8080
+  # graceful shutdown makes sure we have time to finnish any ongoing rest requests before terminating
+  # default value will be 30s before terminating
+  shutdown: graceful
+
+spring:
+  application:
+    name: transfer-service
+  jpa:
+    hibernate:
+      ddl-auto: none
+  datasource:
+    url: jdbc:postgresql://localhost:5432/transfer_service?prepareThreshold=0
+    username: postgres
+    driverClassName: org.postgresql.Driver
+    hikari:
+      maximumPoolSize: 3
+      autoCommit: false
+  liquibase:
+    enabled: true
+    change-log: classpath:db/changelog-master.xml
+
+
+logging.level:
+  com.rashidi: debug
+  org.springframework.jdbc.core: TRACE
+
+management:
+  server:
+    port: 9101
+  endpoint:
+    health:
+      show-details: always
+  endpoints:
+    web:
+      exposure:
+        include: "prometheus, health"
+      base-path: "/"
+      path-mapping:
+        prometheus: "metrics"
+
+springdoc:
+  api-docs:
+    path: /transfer-docs
+  swagger-ui:
+    path: /transfer-docs/swagger-ui-custom.html

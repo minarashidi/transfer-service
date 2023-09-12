@@ -1,0 +1,11 @@
+HELP.md
+/target/
+!.mvn/wrapper/maven-wrapper.jar
+/scripts/postgres
+.DS_Store
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
