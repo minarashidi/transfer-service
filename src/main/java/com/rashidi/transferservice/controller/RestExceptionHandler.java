@@ -1,14 +1,13 @@
-package com.rashidi.transferservice.rest;
+package com.rashidi.transferservice.controller;
 
-import static com.rashidi.transferservice.rest.DepositController.REQUEST_UID;
+import static com.rashidi.transferservice.controller.DepositController.REQUEST_UID;
 import static org.springframework.http.HttpStatus.BAD_REQUEST;
 import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
 import static org.springframework.http.HttpStatus.NOT_FOUND;
 
 import com.rashidi.transferservice.exceptions.NotFoundException;
-import com.rashidi.transferservice.rest.dto.ApiErrorResponse;
+import com.rashidi.transferservice.controller.dto.ApiErrorResponse;
 import jakarta.servlet.ServletRequest;
-import jakarta.validation.ValidationException;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.extern.slf4j.Slf4j;

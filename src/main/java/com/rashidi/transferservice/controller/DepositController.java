@@ -1,8 +1,8 @@
-package com.rashidi.transferservice.rest;
+package com.rashidi.transferservice.controller;
 
-import com.rashidi.transferservice.rest.dto.ApiErrorResponse;
-import com.rashidi.transferservice.rest.dto.DepositRequestDto;
-import com.rashidi.transferservice.rest.dto.DepositResponseDto;
+import com.rashidi.transferservice.controller.dto.ApiErrorResponse;
+import com.rashidi.transferservice.controller.dto.DepositRequestDto;
+import com.rashidi.transferservice.controller.dto.DepositResponseDto;
 import com.rashidi.transferservice.service.DepositService;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;

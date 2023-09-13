@@ -1,4 +1,4 @@
-package com.rashidi.transferservice.rest.dto;
+package com.rashidi.transferservice.controller.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.rashidi.transferservice.domain.Deposit;
@@ -36,5 +36,4 @@ public record DepositRequestDto(
         .amount(amount)
         .build();
   }
-
 }

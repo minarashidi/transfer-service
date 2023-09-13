@@ -1,9 +1,8 @@
-package com.rashidi.transferservice.rest.dto;
+package com.rashidi.transferservice.controller.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.rashidi.transferservice.domain.Deposit;
 import io.swagger.v3.oas.annotations.media.Schema;
-import java.math.BigDecimal;
 import lombok.Builder;
 
 @Builder(toBuilder = true)
