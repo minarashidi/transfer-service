@@ -18,7 +18,11 @@ public class DepositService {
 
   @Transactional
   public Deposit add(Deposit deposit) {
-    customerService.validateCustomer(deposit.getCustomerId());
-    return depositRepository.save(deposit);
+    var depositOptional = depositRepository.findByRequestUid(deposit.getRequestUid());
+    return depositOptional.orElseGet(() -> {
+      log.debug("New deposit request, requestUid: {}", deposit.getRequestUid());
+      customerService.validateCustomer(deposit.getCustomerId());
+      return depositRepository.save(deposit);
+    });
   }
 }

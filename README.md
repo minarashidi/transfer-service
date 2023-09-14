@@ -10,7 +10,7 @@ transfer-service is a Spring Boot application that handles deposit and refund tr
 * Spring Boot 3
 * Build tool: Maven
 * Use docker-compose TestContainers for Integration Tests
-* The use of [Spring Data JDBC](https://docs.spring.io/spring-data/jdbc/docs/current/reference/html/)(NOT Spring Data with Hibernate) to skip boilerplate code for DB handling.
+* The use of [Spring Data JDBC](https://docs.spring.io/spring-data/jdbc/docs/current/reference/html/)
 
 ---
 
@@ -41,7 +41,14 @@ When the application is up and running, it can be accessed through: http://local
 
 ### Monitoring and Alerts
 
-### Concepts
+### Concepts / Improvement points
 
-### Improvement points
+#### Handle idempotency for POST API
+I have used database storage to handle idempotency for POST requests , but we could also use distributed Caching via Redis.
+Ultimately, the choice depends on specific use case, performance requirements, and data retention needs, and both approaches have their trade-offs.
 
+Database Storage: Reliability, Longer-Term Storage
+Distributed Caching: Performance, Expiration
+
+Also in some cases, we can use a hybrid approach, where we use both caching and a database. 
+For example, we can use caching for quick lookups and database storage for long-term persistence

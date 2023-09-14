@@ -4,6 +4,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import com.rashidi.transferservice.controller.dto.ApiErrorResponse;
 import com.rashidi.transferservice.controller.dto.DepositResponseDto;
+import com.rashidi.transferservice.controller.fixture.DepositFixture;
+import com.rashidi.transferservice.domain.Deposit;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.reactive.AutoConfigureWebTestClient;
@@ -34,20 +36,12 @@ public class DepositControllerTest {
   static PostgreSQLContainer postgres = new PostgreSQLContainer<>("postgres:13");
 
   @Test
-  public void shouldAddDepositSuccessfully() {
-    String requestJson = """
-        {
-           "requestUid": "123",
-           "customerId": 1,
-           "fromAccountNumber": "account1",
-           "toAccountNumber": "account2",
-           "amount": 25
-         }
-         """;
+  public void shouldAddDeposit_OnNewDepositRequest() {
+    Deposit deposit = DepositFixture.createDeposit();
     DepositResponseDto depositResponse = webTestClient
         .post().uri(API_URL)
         .contentType(MediaType.APPLICATION_JSON)
-        .bodyValue(requestJson)
+        .bodyValue(deposit)
         .exchange()
         .expectStatus()
         .isCreated()
@@ -56,7 +50,25 @@ public class DepositControllerTest {
         .getResponseBody();
 
     assertThat(depositResponse).isNotNull();
-    assertThat(depositResponse.requestUid()).isEqualTo("123");
+    assertThat(depositResponse.requestUid()).isEqualTo("1111-3333");
+  }
+
+  @Test
+  public void shouldReturnTheSameResponse_OnDuplicateDepositRequest() {
+    Deposit deposit = DepositFixture.createDeposit();
+    DepositResponseDto depositResponse = webTestClient
+        .post().uri(API_URL)
+        .contentType(MediaType.APPLICATION_JSON)
+        .bodyValue(deposit)
+        .exchange()
+        .expectStatus()
+        .isCreated()
+        .expectBody(DepositResponseDto.class)
+        .returnResult()
+        .getResponseBody();
+
+    assertThat(depositResponse).isNotNull();
+    assertThat(depositResponse.requestUid()).isEqualTo("1111-3333");
   }
 
   @Test
