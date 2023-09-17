@@ -21,27 +21,27 @@ spring:
     enabled: true
     change-log: classpath:db/changelog-master.xml
 
-
-logging.level:
-  com.rashidi: debug
-  org.springframework.jdbc.core: TRACE
-
 management:
   server:
     port: 9101
-  endpoint:
-    health:
-      show-details: always
   endpoints:
     web:
       exposure:
-        include: "prometheus, health"
+        include: health, prometheus
       base-path: "/"
       path-mapping:
         prometheus: "metrics"
+  metrics:
+    tags:
+      application: transfer-service
 
 springdoc:
   api-docs:
     path: /transfer-docs
   swagger-ui:
     path: /transfer-docs/swagger-ui-custom.html
+
+logging.level:
+  com.rashidi: debug
+  org.springframework.jdbc.core: TRACE
+  io.micrometer.observation: TRACE

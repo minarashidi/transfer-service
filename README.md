@@ -39,7 +39,24 @@ When the application is up and running, it can be accessed through: http://local
 
 ### Log files
 
-### Monitoring and Alerts
+### Monitoring / Observability
+
+#### Metrics
+
+In this POC, I used prometheus as the monitoring backend and grafana to create dashboards to visualize and analyze data.
+The metrics of the service is exposed through http and prometheus scrapes/collects metrics at that endpoint at regular intervals. 
+
+I used the spring boot production-ready features that are packed in a module
+called actuator https://docs.spring.io/spring-boot/docs/current/reference/html/actuator.html.
+This module is configured to expose metrics on `/prometheus`. 
+(It could also expose kubernetes health checks on `prometheus/health/liveness` & `prometheus/health/readiness`.)
+All metrics are tagged with `application=transfer-service` which comes from the application name in the spring configuration.
+
+#### Tracing
+
+TODO: Use micrometer-tracing, since Sleuth is not used in spring anymore
+https://docs.spring.io/spring-boot/docs/current/reference/html/actuator.html#actuator.micrometer-tracing
+
 
 ### Concepts / Improvement points
 

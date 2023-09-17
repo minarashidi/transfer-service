@@ -29,6 +29,7 @@
         to_account_number VARCHAR NOT NULL,
         amount NUMERIC NOT NULL,
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        CONSTRAINT uq_request_uid UNIQUE (request_uid),
         CONSTRAINT deposit_customer_id_fkey FOREIGN KEY (customer_id) REFERENCES transfer_service.customer (id)
         );
 
