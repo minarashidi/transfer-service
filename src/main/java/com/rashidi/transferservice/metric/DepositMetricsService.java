@@ -22,7 +22,7 @@ public class DepositMetricsService implements MetricsService {
 
   @Override
   public void countCreatedDeposits(Deposit deposit) {
-    Observation.createNotStarted(DepositMetricsService.CREATED_DEPOSITS, observationRegistry)
+    Observation.createNotStarted(CREATED_DEPOSITS, observationRegistry)
         .lowCardinalityKeyValue("request-uid", deposit.getRequestUid())
         .observe(() -> log.debug("Counting created deposits"));
   }

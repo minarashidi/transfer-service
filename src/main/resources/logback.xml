@@ -1,0 +1,40 @@
+<configuration>
+  <!-- Conditionally choose the appender based on the logback_appenders property -->
+  <if condition='property("logback_appenders").contains("json")'>
+    <then>
+      <!-- Use LogstashEncoder for JSON formatting -->
+      <appender class="ch.qos.logback.core.ConsoleAppender" name="logAppender">
+        <encoder class="net.logstash.logback.encoder.LogstashEncoder"/>
+      </appender>
+    </then>
+    <else>
+      <!-- Use a custom pattern for non-JSON formatting -->
+      <appender class="ch.qos.logback.core.ConsoleAppender" name="logAppender">
+        <encoder>
+          <charset>UTF-8</charset>
+          <pattern>%green(%d{ISO8601}) %highlight(%-5level) [%blue(%t)] [%X{traceId:-}] [%X{spanId:-}] %yellow([%X{order:-}]) %logger -
+            %msg%n%throwable
+          </pattern>
+        </encoder>
+      </appender>
+    </else>
+  </if>
+
+  <root level="INFO">
+    <appender-ref ref="logAppender"/>
+  </root>
+  <logger name="com.rashidi.transferservice" level="DEBUG"/>
+</configuration>
+
+  <!--Format log messages to include:
+   The date and time in ISO 8601 format
+   The log level, displayed in a highlighted color.
+   The thread name, displayed in blue.
+   The trace ID, displayed in blue.
+   The span ID, displayed in blue.
+   The order of the log event, displayed in yellow.
+   The logger name.
+   The log messages.
+   A newline character.
+   The stack trace of any exception that was thrown.
+  -->

@@ -11,6 +11,8 @@ transfer-service is a Spring Boot application that handles deposit and refund tr
 * Build tool: Maven
 * Use docker-compose TestContainers for Integration Tests
 * The use of [Spring Data JDBC](https://docs.spring.io/spring-data/jdbc/docs/current/reference/html/)
+* Swagger API documentation
+* Monitoring and Observability using Spring Boot Actuator and Micrometer
 
 ---
 
@@ -35,11 +37,14 @@ transfer-service is a Spring Boot application that handles deposit and refund tr
 ---
 
 ### API Documentation
-When the application is up and running, it can be accessed through: http://localhost:8080/transfer-docs/swagger-ui-custom.html
-
-### Log files
+Access the Swagger API documentation at: [http://localhost:8080/transfer-docs/swagger-ui-custom.html](http://localhost:8080/transfer-docs/swagger-ui-custom.html) once your application is running.
 
 ### Monitoring / Observability
+
+Access the following endpoints once your application is running:
+- Prometheus: [http://localhost:9090](http://localhost:9090)
+- Grafana Dashboard: [http://localhost:3003](http://localhost:3003)
+- Zipkin UI: [http://localhost:9411](http://localhost:9411)
 
 #### Metrics
 
@@ -54,9 +59,14 @@ All metrics are tagged with `application=transfer-service` which comes from the 
 
 #### Tracing
 
-TODO: Use micrometer-tracing, since Sleuth is not used in spring anymore
+I used micrometer-tracing and zipkin as trace collector (Sleuth is not used in spring boot anymore)
 https://docs.spring.io/spring-boot/docs/current/reference/html/actuator.html#actuator.micrometer-tracing
 
+
+#### Logs
+For logging, using Logback and configuring it for different log formats based on the logback_appenders property to use
+- LogstashEncoder for JSON formatting 
+- Custom pattern for non-JSON formatting
 
 ### Concepts / Improvement points
 

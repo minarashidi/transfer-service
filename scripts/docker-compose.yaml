@@ -33,3 +33,9 @@ services:
       - ./cfg/grafana/grafana.ini:/etc/grafana/grafana.ini
     env_file:
       - ./cfg/grafana/grafana.env
+
+  zipkin:
+    image: openzipkin/zipkin
+    container_name: zipkin
+    ports:
+      - "9411:9411" # Expose the Zipkin UI port
