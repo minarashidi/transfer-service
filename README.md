@@ -64,7 +64,7 @@ https://docs.spring.io/spring-boot/docs/current/reference/html/actuator.html#act
 
 
 #### Logs
-For logging, using Logback and configuring it for different log formats based on the logback_appenders property to use
+For logging, using Logback and configuring it for different log formats based on the logback_appenders property to use:
 - LogstashEncoder for JSON formatting 
 - Custom pattern for non-JSON formatting
 

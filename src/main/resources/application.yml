@@ -34,6 +34,12 @@ management:
   metrics:
     tags:
       application: transfer-service
+  # >
+  # By default, Spring Boot samples only 10% of requests to prevent overwhelming the trace backend.
+  # This property switches it to 100% so that every request is sent to the trace backend(I used Zipkin as the trace backend.)
+  tracing:
+      sampling:
+        probability: 1.0
 
 springdoc:
   api-docs:
