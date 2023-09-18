@@ -58,8 +58,8 @@ This module is configured to expose metrics on `/prometheus`.
 All metrics are tagged with `application=transfer-service` which comes from the application name in the spring configuration.
 
 #### Tracing
-
-I used micrometer-tracing and zipkin as trace collector (Sleuth is not used in spring boot anymore)
+I used OpenTelemetry with Zipkin(tracing backends) to collect and export traces from the application.
+Instead of using Sleuth, which is no longer used in Spring Boot 3, I used micrometer-tracing.
 https://docs.spring.io/spring-boot/docs/current/reference/html/actuator.html#actuator.micrometer-tracing
 
 
@@ -79,3 +79,9 @@ Distributed Caching: Performance, Expiration
 
 Also in some cases, we can use a hybrid approach, where we use both caching and a database. 
 For example, we can use caching for quick lookups and database storage for long-term persistence
+
+#### OpenTelemetry
+OpenTelemetry is the observability framework which provides a standard way to collect observability data and export these data(metrics, traces, and logs) from our applications.
+It is vendor-neutral and supports a variety of backends, including Zipkin.
+It means we're not locked into a specific tracing or monitoring tool. We can switch or use multiple backends as needed.
+
