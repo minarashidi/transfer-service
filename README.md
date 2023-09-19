@@ -58,8 +58,7 @@ This module is configured to expose metrics on `/prometheus`.
 All metrics are tagged with `application=transfer-service` which comes from the application name in the spring configuration.
 
 #### Tracing
-I used OpenTelemetry with Zipkin(tracing backends) to collect and export traces from the application.
-Instead of using Sleuth, which is no longer used in Spring Boot 3, I used micrometer-tracing.
+Instead of using Sleuth, which is no longer used in Spring Boot 3, I used micrometer-tracing, which provides a simple facade for the most popular tracer libraries, and letting us instrument our application code without vendor lock-in.
 https://docs.spring.io/spring-boot/docs/current/reference/html/actuator.html#actuator.micrometer-tracing
 
 

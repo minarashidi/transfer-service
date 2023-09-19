@@ -36,7 +36,7 @@
 
     <dependency>
       <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-actuator-autoconfigure</artifactId>
+      <artifactId>spring-boot-starter-actuator</artifactId>
     </dependency>
 
     <dependency>
@@ -44,13 +44,14 @@
       <artifactId>spring-boot-starter-aop</artifactId>
     </dependency>
 
-    <!--Bridges the Micrometer Observation API to OpenTelemetry-->
+    <!--I'm using micrometer-tracing, by adding a bridge the micrometer-tracing library is added transitively.-->
+    <!--OpenTelemetry Tracer: Bridges the Micrometer Observation API to OpenTelemetry-->
     <dependency>
       <groupId>io.micrometer</groupId>
       <artifactId>micrometer-tracing-bridge-otel</artifactId>
     </dependency>
 
-    <!--Reports traces to Zipkin-->
+    <!--Reporter/Zipkin with OpenTelemetry: Reports traces to Zipkin-->
     <dependency>
       <groupId>io.opentelemetry</groupId>
       <artifactId>opentelemetry-exporter-zipkin</artifactId>
