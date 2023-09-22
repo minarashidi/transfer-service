@@ -13,6 +13,7 @@ transfer-service is a Spring Boot application that handles deposit and refund tr
 * The use of [Spring Data JDBC](https://docs.spring.io/spring-data/jdbc/docs/current/reference/html/)
 * Swagger API documentation
 * Monitoring and Observability using Spring Boot Actuator and Micrometer
+* CI/CD using Github Actions
 
 ---
 
@@ -73,8 +74,8 @@ For logging, using Logback and configuring it for different log formats based on
 I have used database storage to handle idempotency for POST requests , but we could also use distributed Caching via Redis.
 Ultimately, the choice depends on specific use case, performance requirements, and data retention needs, and both approaches have their trade-offs.
 
-Database Storage: Reliability, Longer-Term Storage
-Distributed Caching: Performance, Expiration
+* Database Storage: Reliability, Longer-Term Storage
+* Distributed Caching: Performance, Expiration
 
 Also in some cases, we can use a hybrid approach, where we use both caching and a database. 
 For example, we can use caching for quick lookups and database storage for long-term persistence

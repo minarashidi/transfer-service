@@ -1,0 +1,31 @@
+name: Java CI/CD
+on:
+  push:
+    branches:
+      - '**'
+    tags-ignore:
+      - v*
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Java 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: 17
+          distribution: temurin
+          cache: 'maven'
+
+      - name: Build Maven project
+        run: mvn clean install
+
+      - name: Report docker image
+        run: echo "Pushing a Docker image to the Docker registry, e.g., ECR."
+
+      - name: Send check to Slack
+        run: echo "sending Slack message on the build status"
+
